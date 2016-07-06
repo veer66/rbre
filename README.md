@@ -2,12 +2,9 @@
 
 JRuby's Joni wrapper for Clojure
 
-## Installation
-
-
-## Options
-
-
 ## Examples
 
-
+```clojure
+(re-split (make-re "( )") "a b c") 
+;; output: ["a" " " "b" " " "c"]
+```
