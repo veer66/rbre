@@ -2,6 +2,8 @@
 
 JRuby's Joni wrapper for Clojure
 
+This project is still __experimental__.
+
 ## Examples
 
 ```clojure
