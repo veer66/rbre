@@ -10,3 +10,5 @@ This project is still __experimental__.
 (re-split (make-re "( )") "a b c") 
 ;; output: ["a" " " "b" " " "c"]
 ```
+
+[![Clojars Project](https://img.shields.io/clojars/v/rbre.svg)](https://clojars.org/rbre)
