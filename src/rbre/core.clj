@@ -48,7 +48,8 @@
       (.getEagerRegion matcher))))
 
 (defn slice-to-string [b-txt s e]
-  (String. (Arrays/copyOfRange b-txt s e) "UTF-8"))
+  (when (>= s 0)
+    (String. (Arrays/copyOfRange b-txt s e) "UTF-8")))
 
 (defn region-to-string [region b-txt i]
   (let [begin-reg (aget (.-beg region) i)
@@ -58,9 +59,11 @@
 (defn region-regis-to-toks [region b-txt toks]
   (loop [toks toks i 1]
     (if (< i (.-numRegs region))
-      (recur (conj toks
-                   (region-to-string region b-txt i))
-             (inc i))
+      (let [tok (region-to-string region b-txt i)]
+        (recur (if tok
+                 (conj toks tok)
+                 toks)
+               (inc i)))
       toks)))
 
 (defn re-split [re txt]
@@ -80,7 +83,5 @@
                                            b-txt
                                            (conj toks tok))
                      end-reg))))))))
-              
-            
 
 

@@ -20,4 +20,7 @@
            ["ปลา" " " "กิน" " " "มด"])))
   (testing "thai without captures"
     (is (= (re-split (make-re "\\s+") "ปลา กิน มด")
-           ["ปลา" "กิน" "มด"]))))
+           ["ปลา" "กิน" "มด"])))
+  (testing "partial capture"
+    (is (= (re-split (make-re "\\s+|(\\.)") "AB CD.EF")
+           ["AB" "CD" "." "EF"]))))

@@ -1,4 +1,4 @@
-(defproject rbre "0.1.0"
+(defproject rbre "0.1.1"
   :description "JRuby's Joni wrapper for Clojure"
   :url "https://gitlab.com/veer66/rbre"
   :license {:name "The 2-Clause BSD License"
