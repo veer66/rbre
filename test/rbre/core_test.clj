@@ -14,4 +14,7 @@
            ["a" "b" "c"])))
   (testing "re-split with delimiter"
     (is (= (re-split (make-re "( )") "a b c")
-           ["a" " " "b" " " "c"]))))
+           ["a" " " "b" " " "c"])))
+  (testing "thai"
+    (is (= (re-split (make-re "( )") "ปลา กิน มด")
+           ["ปลา" " " "กิน" " " "มด"]))))
