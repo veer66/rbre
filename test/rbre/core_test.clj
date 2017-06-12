@@ -17,4 +17,7 @@
            ["a" " " "b" " " "c"])))
   (testing "thai"
     (is (= (re-split (make-re "( )") "ปลา กิน มด")
-           ["ปลา" " " "กิน" " " "มด"]))))
+           ["ปลา" " " "กิน" " " "มด"])))
+  (testing "thai without captures"
+    (is (= (re-split (make-re "\\s+") "ปลา กิน มด")
+           ["ปลา" "กิน" "มด"]))))
