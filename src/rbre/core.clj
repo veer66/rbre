@@ -66,7 +66,7 @@
                (inc i)))
       toks)))
 
-(defn re-split [re txt]
+(defn split [re txt]
   (let [b-txt (.getBytes txt)
         len (count b-txt)]
     (loop [toks [] offset 0]

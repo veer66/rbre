@@ -1,26 +1,26 @@
 (ns rbre.core-test
   (:require [clojure.test :refer :all]
-            [rbre.core :refer :all]))
+            [rbre.core :as rbre]))
 
-(deftest re-split-test
-  (testing "re-split empty"
-    (is (= (re-split (make-re " ") "")
+(deftest split-test
+  (testing "split empty"
+    (is (= (rbre/split (rbre/make-re " ") "")
            [])))
-  (testing "re-split simple"
-    (is (= (re-split (make-re " ") "a b")
+  (testing "split simple"
+    (is (= (rbre/split (rbre/make-re " ") "a b")
            ["a" "b"])))
-  (testing "re-split 3"
-    (is (= (re-split (make-re " ") "a b c")
+  (testing "split 3"
+    (is (= (rbre/split (rbre/make-re " ") "a b c")
            ["a" "b" "c"])))
-  (testing "re-split with delimiter"
-    (is (= (re-split (make-re "( )") "a b c")
+  (testing "split with delimiter"
+    (is (= (rbre/split (rbre/make-re "( )") "a b c")
            ["a" " " "b" " " "c"])))
   (testing "thai"
-    (is (= (re-split (make-re "( )") "ปลา กิน มด")
+    (is (= (rbre/split (rbre/make-re "( )") "ปลา กิน มด")
            ["ปลา" " " "กิน" " " "มด"])))
   (testing "thai without captures"
-    (is (= (re-split (make-re "\\s+") "ปลา กิน มด")
+    (is (= (rbre/split (rbre/make-re "\\s+") "ปลา กิน มด")
            ["ปลา" "กิน" "มด"])))
   (testing "partial capture"
-    (is (= (re-split (make-re "\\s+|(\\.)") "AB CD.EF")
+    (is (= (rbre/split (rbre/make-re "\\s+|(\\.)") "AB CD.EF")
            ["AB" "CD" "." "EF"]))))

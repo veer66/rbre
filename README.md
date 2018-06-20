@@ -7,10 +7,12 @@ This project is still __experimental__.
 ## Examples
 
 ```clojure
-(re-split (make-re "( )") "a b c") 
+(require '[rbre.core :as rbre])
+
+(rbre/split (rbre/make-re "( )") "a b c") 
 ;; output: ["a" " " "b" " " "c"]
 
-(re-split (make-re "\\s+|(\\.)") "AB CD.EF") 
+(rbre/split (rbre/make-re "\\s+|(\\.)") "AB CD.EF") 
 ;; output: ["AB" "CD" "." "EF"]
 
 ```
