@@ -8,7 +8,11 @@
   (testing "basic not match"
     (is (not (rbre/match? (rbre/make-re "A+") "BBB"))))
   (testing "partially match (not match)"
-    (is (not (rbre/match? (rbre/make-re "A+") "AAAB")))))
+    (is (not (rbre/match? (rbre/make-re "A+") "AAAB"))))
+  (testing "empty string matches"
+    (is (rbre/match? (rbre/make-re "A*") "")))
+  (testing "empty string does not match"
+    (is (not (rbre/match? (rbre/make-re "A+") "")))))
 
 (deftest split-test
   (testing "split empty"
