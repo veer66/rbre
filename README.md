@@ -15,6 +15,9 @@ This project is still __experimental__.
 (rbre/split (rbre/make-re "\\s+|(\\.)") "AB CD.EF") 
 ;; output: ["AB" "CD" "." "EF"]
 
+(rbre/match? (rbre/make-re "A+") "AAA")
+;; output: true
+
 ```
 
 [![Clojars Project](https://img.shields.io/clojars/v/rbre.svg)](https://clojars.org/rbre)
