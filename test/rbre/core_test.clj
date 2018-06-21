@@ -2,6 +2,14 @@
   (:require [clojure.test :refer :all]
             [rbre.core :as rbre]))
 
+(deftest match?-test
+  (testing "basic"
+    (is (rbre/match? (rbre/make-re "A+") "AAA")))
+  (testing "basic not match"
+    (is (not (rbre/match? (rbre/make-re "A+") "BBB"))))
+  (testing "partially match (not match)"
+    (is (not (rbre/match? (rbre/make-re "A+") "AAAB")))))
+
 (deftest split-test
   (testing "split empty"
     (is (= (rbre/split (rbre/make-re " ") "")

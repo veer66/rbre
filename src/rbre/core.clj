@@ -66,6 +66,13 @@
                (inc i)))
       toks)))
 
+(defn match? [re txt]
+  (let  [b-txt (.getBytes txt)
+         matcher (.matcher re b-txt)
+         len (count b-txt)
+         result (.match matcher 0 len  Option/DEFAULT)]
+    (= result len)))
+
 (defn split [re txt]
   (let [b-txt (.getBytes txt)
         len (count b-txt)]
