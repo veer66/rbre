@@ -71,7 +71,7 @@
          matcher (.matcher re b-txt)
          len (count b-txt)
          result (.match matcher 0 len  Option/DEFAULT)]
-    (= result len)))
+    (>= result 0)))
 
 (defn split [re txt]
   (let [b-txt (.getBytes txt)
