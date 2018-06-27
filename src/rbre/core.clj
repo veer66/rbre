@@ -67,16 +67,23 @@
       toks)))
 
 
+(defn re-search [matcher pos len]
+  (.search matcher pos len 0))
+
+(defn create-match-data [matcher b-txt pos len]
+  (let [s (.getBegin matcher)
+        e (.getEnd matcher)]
+    [(String. b-txt s (- e s))]))
+
 (defn match
   ([re txt] (match re txt 0))
-  ([re txt pos] (let  [b-txt (.getBytes txt)
-                       matcher (.matcher re b-txt)
+  ([re txt pos] (let  [b-txt (.getBytes txt)                       
                        len (count b-txt)
-                       result (.match matcher pos len  Option/DEFAULT)]
+                       matcher (.matcher re b-txt)
+                       search-result (re-search matcher pos len)]
                   (cond
-                    (>= result 0) [(String. b-txt pos result)]
+                    (>= search-result 0) (create-match-data matcher b-txt pos len)
                     :else nil))))
-
 
 (defn match?
   ([re txt] (match? re txt 0))

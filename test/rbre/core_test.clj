@@ -2,11 +2,6 @@
   (:require [clojure.test :refer :all]
             [rbre.core :as rbre]))
 
-(deftest match-test
-  (testing "basic"
-    (is (= (rbre/match (rbre/compile "A+") "AAA")
-           ["AAA"]))))
-
 (deftest match?-test
   (testing "basic"
     (is (rbre/match? (rbre/compile "A+") "AAA")))
