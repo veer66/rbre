@@ -2,7 +2,8 @@
 
 JRuby's Joni wrapper for Clojure
 
-This project is still __experimental__.
+This project is still __experimental__. 
+This project is supposed to provide A regular expression processor in Clojure that behaves similar to one in Ruby.
 
 ## Examples
 
