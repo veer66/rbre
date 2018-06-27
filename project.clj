@@ -1,5 +1,5 @@
-(defproject rbre "0.2.0"
-  :description "JRuby's Joni wrapper for Clojure"
+(defproject rbre "0.3.0"
+  :description "rbre provides a Ruby-like regular expression processor in Clojure by wrapping JRuby's Joni"
   :url "https://gitlab.com/veer66/rbre"
   :license {:name "MIT License"
             :url "https://opensource.org/licenses/MIT"}
