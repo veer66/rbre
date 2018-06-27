@@ -11,4 +11,10 @@
            ["AAB"])))
   (testing "match partial non-latin"
     (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭")
-           ["⎈⎈⎈☭"]))))
+           ["⎈⎈⎈☭"])))
+  (testing "match pos"
+    (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭" 3)
+           ["⎈☭"])))
+  (testing "match pos reverse"
+    (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭" -2)
+           ["⎈☭"]))))

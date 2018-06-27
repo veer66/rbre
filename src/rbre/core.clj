@@ -36,6 +36,8 @@
 (import org.jcodings.specific.UTF8Encoding)
 (import java.util.Arrays)
 
+(comment (require '[clojure.pprint :refer [pprint]]))
+
 (defn compile [raw-pat]
   (let [pat (.getBytes raw-pat)]
     (Regex. pat 0 (count pat) Option/NONE UTF8Encoding/INSTANCE)))
@@ -68,17 +70,49 @@
 
 
 (defn re-search [matcher pos len]
-  (.search matcher pos len 0))
+  (.search matcher pos (- len pos) 0))
+
+(defn b-len [b]
+  (cond
+    (= (bit-and 2r11110000 b) 2r11110000) 4
+    (= (bit-and 2r11100000 b) 2r11100000) 3
+    (= (bit-and 2r11000000 b) 2r11000000) 2
+    (= (bit-and 2r10000000 b) 2r00000000) 1))
+
+(defn ch-len [b-txt u8-i]
+  (let [b (aget b-txt u8-i)]
+    (b-len b)))
+
+(defn to-utf8-idx [b-txt i]
+  (reduce (fn [u8-i j] (+ u8-i (ch-len b-txt u8-i)))
+          (range (inc i))))
+
+(defn to-utf8-cnt-indice [b-txt]
+  (let [len (count b-txt)]
+    (loop [indice [] i 0]
+      (if (< i len)
+        (let [cnt (ch-len b-txt i)]
+          (recur (conj indice cnt)
+                 (+ i cnt)))
+        indice))))
 
 (defn create-match-data [matcher b-txt pos len]
   (let [s (.getBegin matcher)
         e (.getEnd matcher)]
     [(String. b-txt s (- e s))]))
 
+(defn to-utf8-pos [b-txt pos]
+  (if (< pos 0)
+    (->> (to-utf8-cnt-indice b-txt)
+         (drop-last pos)
+         (reduce +))
+    (to-utf8-idx b-txt pos)))
+
 (defn match
   ([re txt] (match re txt 0))
-  ([re txt pos] (let  [b-txt (.getBytes txt)                       
+  ([re txt pos] (let  [b-txt (.getBytes txt "UTF-8")
                        len (count b-txt)
+                       pos (to-utf8-pos b-txt pos)
                        matcher (.matcher re b-txt)
                        search-result (re-search matcher pos len)]
                   (cond
@@ -91,7 +125,7 @@
                   (not (nil? match-data)))))
 
 (defn split [re txt]
-  (let [b-txt (.getBytes txt)
+  (let [b-txt (.getBytes txt "UTF-8")
         len (count b-txt)]
     (loop [toks [] offset 0]
       (if (>= offset len)
@@ -107,5 +141,3 @@
                                            b-txt
                                            (conj toks tok))
                      end-reg))))))))
-
-
