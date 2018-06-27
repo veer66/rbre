@@ -10,16 +10,16 @@ This project is supposed to provide A regular expression processor in Clojure th
 ```clojure
 (require '[rbre.core :as rbre])
 
-(rbre/split (rbre/make-re "( )") "a b c") 
+(rbre/split (rbre/compile "( )") "a b c") 
 ;; output: ["a" " " "b" " " "c"]
 
-(rbre/split (rbre/make-re "\\s+|(\\.)") "AB CD.EF") 
+(rbre/split (rbre/compile "\\s+|(\\.)") "AB CD.EF") 
 ;; output: ["AB" "CD" "." "EF"]
 
-(rbre/match? (rbre/make-re "A+") "AAA")
+(rbre/match? (rbre/compile "A+") "AAA")
 ;; output: true
 
-(rbre/match? (rbre/make-re "ABC") "XABCD" 2)
+(rbre/match? (rbre/compile "ABC") "XABCD" 2)
 ;; output: false
 
 ```

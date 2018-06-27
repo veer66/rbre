@@ -36,7 +36,7 @@
 (import org.jcodings.specific.UTF8Encoding)
 (import java.util.Arrays)
 
-(defn make-re [raw-pat]
+(defn compile [raw-pat]
   (let [pat (.getBytes raw-pat)]
     (Regex. pat 0 (count pat) Option/NONE UTF8Encoding/INSTANCE)))
 
@@ -66,13 +66,22 @@
                (inc i)))
       toks)))
 
-(defn match?
-  ([re txt] (match? re txt 0))
+
+(defn match
+  ([re txt] (match re txt 0))
   ([re txt pos] (let  [b-txt (.getBytes txt)
                        matcher (.matcher re b-txt)
                        len (count b-txt)
                        result (.match matcher pos len  Option/DEFAULT)]
-                  (>= result 0))))
+                  (cond
+                    (>= result 0) [(String. b-txt pos result)]
+                    :else nil))))
+
+
+(defn match?
+  ([re txt] (match? re txt 0))
+  ([re txt pos] (let [match-data (match re txt pos)]
+                  (not (nil? match-data)))))
 
 (defn split [re txt]
   (let [b-txt (.getBytes txt)
