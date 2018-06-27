@@ -8,4 +8,7 @@
            ["AAA"])))
   (testing "match partial"
     (is (= (rbre/match (rbre/compile "A+B") "XXXAABC")
-           ["AAB"]))))
+           ["AAB"])))
+  (testing "match partial non-latin"
+    (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭")
+           ["⎈⎈⎈☭"]))))
