@@ -22,6 +22,9 @@ This project is supposed to provide A regular expression processor in Clojure th
 (rbre/match? (rbre/compile "ABC") "XABCD" 2)
 ;; output: false
 
+(rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭" -2)
+;; output: ["⎈☭"]
+
 ```
 
 [![Clojars Project](https://img.shields.io/clojars/v/rbre.svg)](https://clojars.org/rbre)
