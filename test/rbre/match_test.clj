@@ -4,17 +4,17 @@
 
 (deftest match-test
   (testing "basic"
-    (is (= (rbre/match (rbre/compile "A+") "AAA")
+    (is (= (rbre/match (rbre/compile-pattern "A+") "AAA")
            ["AAA"])))
   (testing "match partial"
-    (is (= (rbre/match (rbre/compile "A+B") "XXXAABC")
+    (is (= (rbre/match (rbre/compile-pattern "A+B") "XXXAABC")
            ["AAB"])))
   (testing "match partial non-latin"
-    (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭")
+    (is (= (rbre/match (rbre/compile-pattern "⎈+☭") "卐⎈⎈⎈☭")
            ["⎈⎈⎈☭"])))
   (testing "match pos"
-    (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭" 3)
+    (is (= (rbre/match (rbre/compile-pattern "⎈+☭") "卐⎈⎈⎈☭" 3)
            ["⎈☭"])))
   (testing "match pos reverse"
-    (is (= (rbre/match (rbre/compile "⎈+☭") "卐⎈⎈⎈☭" -2)
+    (is (= (rbre/match (rbre/compile-pattern "⎈+☭") "卐⎈⎈⎈☭" -2)
            ["⎈☭"]))))
