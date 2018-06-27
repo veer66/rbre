@@ -18,6 +18,9 @@ This project is still __experimental__.
 (rbre/match? (rbre/make-re "A+") "AAA")
 ;; output: true
 
+(rbre/match? (rbre/make-re "ABC") "XABCD" 2)
+;; output: false
+
 ```
 
 [![Clojars Project](https://img.shields.io/clojars/v/rbre.svg)](https://clojars.org/rbre)
