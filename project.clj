@@ -1,4 +1,4 @@
-(defproject rbre "0.4.0"
+(defproject rbre "0.4.1"
   :description "rbre provides a Ruby-like regular expression processor in Clojure by wrapping JRuby's Joni"
   :url "https://gitlab.com/veer66/rbre"
   :license {:name "MIT License"

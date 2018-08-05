@@ -38,7 +38,7 @@
 
 (comment (require '[clojure.pprint :refer [pprint]]))
 
-(defn compile-pattern [raw-pat]
+(defn comp-pat [raw-pat]
   (let [pat (.getBytes raw-pat)]
     (Regex. pat 0 (count pat) Option/NONE UTF8Encoding/INSTANCE)))
 
